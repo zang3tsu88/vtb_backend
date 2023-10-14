@@ -9,13 +9,10 @@ router.get('/', (req, res) => {
 });
 // Получение списка отделений
 router.get('/branches', branchController.getBranches);
-
-// Добавление нового отделения
 router.get('/atms', atmController.getATMs);
 
-// Обновление информации об отделении
-router.patch('/branches/:id', branchController.getBranch);
-router.patch('/atms/:id', atmController.getATM);
+router.get('/branches/:id', branchController.getBranch);
+router.get('/atms/:id', atmController.getATM);
 
 // несуществующая страница
 router.use('*', (req, res, next) => {

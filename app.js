@@ -3,10 +3,12 @@ const cors = require('cors')
 const helmet = require('helmet');
 const mongoose = require('mongoose')
 const PORT = 3000
-// const db =
 const router = require('./routes');
 
-// mongoose.connect()
+// mongoose.connect('mongodb://localhost:27017')
+//   .then(() => console.log('Connected to DB!'))
+//   .catch(() => console.log('DB connection error!'));
+
 const app = express();
 
 app.use(express.json())

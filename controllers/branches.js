@@ -27,7 +27,7 @@ const getBranch = (req, res) => {
     const branches = JSON.parse(data);
 
     const branchId = req.params.id;
-    const branch = branches.find(branch => branch.id === branchId);
+    const branch = branches.find(branch => branch._id.$oid === branchId);
 
     if (!branch) {
       return res.status(404).json({ message: 'Отделение не найдено' });

@@ -1,12 +1,6 @@
 const Atm = require('../models/Atm');
 const fs = require('fs');
 
-// const addId = fs.readFileSync('./db/vtb.atms.json', 'utf8');
-// const id = JSON.parse(addId);
-
-// console.log(typeof id)
-
-
 // // Получение списка банковских автоматов
 // const getATMs = async (req, res) => {
 //   try {
@@ -18,7 +12,7 @@ const fs = require('fs');
 // };
 const getATMs = (req, res) => {
   try {
-    const data = fs.readFileSync('./db/vtb.atms.json', 'utf8');
+    const data = fs.readFileSync('./db/atms.json', 'utf8');
     const branches = JSON.parse(data);
     res.json(branches);
   } catch (error) {
@@ -31,22 +25,16 @@ const getATM = (req, res) => {
     const data = fs.readFileSync('./db/atms.json', 'utf8');
     const branches = JSON.parse(data);
 
-    const branchId = req.params._id.$oid;
-    console.log(req.params._id.$oid)
-    console.log(branch._id.$oid)
-    res.send({
-      req: req.params._id.$oid,
-      branch: branch._id.$oid
-    })
-    // const branch = branches.find(branch => branch._id.$oid === branchId);
+    const branchId = req.params.id;
+    const branch = branches.find(branch => branch._id.$oid === branchId);
 
-    // if (!branch) {
-    //   return res.status(404).json({ message: 'Терминал не найден' });
-    // }
+    if (!branch) {
+      return res.status(404).json({ message: 'Терминал не найден' });
+    }
 
-    // res.json(branch);
+    res.json(branch);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ message: error.message, params: req.params });
   }
 };
 
