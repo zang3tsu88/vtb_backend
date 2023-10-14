@@ -6,7 +6,7 @@ const PORT = 3000
 // const db =
 const router = require('./routes');
 
-
+// mongoose.connect()
 const app = express();
 
 app.use(express.json())
